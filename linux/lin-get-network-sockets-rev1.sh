@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#IMPORTANT: Root privileges required but "sudo" is inlcuded in the netstat command below!
+#This script requires sshpass on your analyst system, that you create a "servers.txt" list of target hosts, and that you edit user/pw below
 # --- Tunable Parameters ---
 SERVERS_FILE="servers.txt"
 SSH_USER="security"
