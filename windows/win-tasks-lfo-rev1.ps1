@@ -1,9 +1,12 @@
+#NOTE: You will need to use an account with adequate permissions for PoSh remote access to your targets
 $timestamp = Get-Date -Format "yyyyMMdd_HHmm"
+#Change these to match your desired output directory paths
 $task_input_filename  = "c:\cases\threathunt-case-1\servers-scheduledtasks-$timestamp.csv"
 $task_output_filename = "c:\cases\threathunt-case-1\servers-scheduledtasks-sorted-lfo-$timestamp.csv"
 
-#$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
-$servers = "RTW-W2K22-1"
+#Uncomment and edit these lines to either populate your $server target list via AD or manually
+$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
+#$servers = "RTW-W2K22-1"
 
 foreach ($server in $servers) {
     Get-ScheduledTask -CimSession $server |
