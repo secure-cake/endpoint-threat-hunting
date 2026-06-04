@@ -1,9 +1,12 @@
+#NOTE: You'll need to use an account with adequate permissions for remote PoSh access and netstat on remote hosts
 $timestamp = Get-Date -Format "yyyyMMdd_HHmm"
+#Change these variables to match your desired output directory path
 $socket_input_filename  = "C:\cases\threathunt-case-1\servers-sockets-$timestamp.csv"
 $socket_output_filename = "C:\cases\threathunt-case-1\servers-sockets-sorted-lfo-$timestamp.csv"
 
-#$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
-$servers = "RTW-W2K22-1"
+#Uncomment and edit the next lines to either populate your $servers target list from AD or manually
+$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
+#$servers = "RTW-W2K22-1"
 
 # Private IP ranges to exclude
 function IsPrivateIP {
