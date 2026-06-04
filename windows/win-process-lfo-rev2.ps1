@@ -1,8 +1,13 @@
+#NOTE: You'll need to use an account with adequate permissions for remote PoSh access to your targets
 $timestamp = Get-Date -Format "yyyyMMdd_HHmm"
+
+#Change these to match your desired output directory paths
 $process_input_filename  = "c:\cases\threathunt-case-1\servers-processes-$timestamp.csv"
 $process_output_filename = "c:\cases\threathunt-case-1\servers-processes-sorted-lfoo-$timestamp.csv"
 
-$servers = "RTW-W2K22-1"
+#Uncomment and edit the lines below to populate your $servers target list via AD or manually
+$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
+#$servers = "RTW-W2K22-1"
 
 Get-CimInstance -ComputerName $servers -ClassName Win32_Process -OperationTimeoutSec 30 |
     Select-Object @{N='ComputerName';    E={$_.PSComputerName}},
