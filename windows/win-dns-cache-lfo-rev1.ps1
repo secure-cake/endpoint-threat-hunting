@@ -1,9 +1,12 @@
+#NOTE: You'll need to use an account with adequate permissions for remote PoSh access
 $timestamp = Get-Date -Format "yyyyMMdd_HHmm"
+#Change to match your desired output path
 $dns_input_filename  = "C:\cases\threathunt-case-1\servers-dns-$timestamp.csv"
 $dns_output_filename = "C:\cases\threathunt-case-1\servers-dns-sorted-lfo-$timestamp.csv"
 
-#$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
-$servers = "RTW-W2K22-1"
+#Uncomment and edit the lines below to populate your $servers target list via AD or manually
+$servers = (Get-ADComputer -Filter {Enabled -eq $true} -SearchBase "ou=servers,dc=test,dc=local").Name
+#$servers = "RTW-W2K22-1"
 
 # Private IP ranges to exclude
 function IsPrivateIP {
